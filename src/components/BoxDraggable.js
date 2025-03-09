@@ -42,7 +42,7 @@ function BoxDraggable(box) {
                 cursor: 'pointer',
                 border: box.isSelected ? '3px solid red' : '',
             }}
-            onClick={() => box.toggleSelection()}
+            onDoubleClick={() => box.toggleSelection()}
         >
             {box.children}
         </div>
