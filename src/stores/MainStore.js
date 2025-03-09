@@ -33,10 +33,10 @@ const MainStore = types
                 });
             },
             undo() {
-                undoManager.undo();
+                undoManager.canUndo && undoManager.undo();
             },
             redo() {
-                undoManager.redo();
+                undoManager.canRedo && undoManager.redo();
             },
         };
     })
