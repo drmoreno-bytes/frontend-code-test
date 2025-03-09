@@ -20,6 +20,15 @@ const MainStore = types
                     if (box.isSelected) box.setColor(color);
                 });
             },
+            moveSelectedBoxes(dx, dy) {
+                const boxesToMove = self.boxes.filter((box) => box.isSelected);
+                if (!boxesToMove || boxesToMove.length <= 0) {
+                    return;
+                }
+                boxesToMove.forEach((b) => {
+                    b.setPosition(b.left + dx, b.top + dy);
+                });
+            },
         };
     })
     .views((self) => ({

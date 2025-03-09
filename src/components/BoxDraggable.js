@@ -18,18 +18,10 @@ function BoxDraggable(box) {
                 listeners: {
                     move(event) {
                         const { dx, dy } = event;
-                        const selectedBoxes = store.boxes.filter(
-                            (b) => b.isSelected
-                        );
-                        const boxesToMove =
-                            selectedBoxes.length > 0 ? selectedBoxes : [box];
-
-                        boxesToMove.forEach((b) => {
-                            const x = b.left + dx;
-                            const y = b.top + dy;
-
-                            b.setPosition(x, y);
-                        });
+                        const selectedBoxes = store.selectedBoxCount;
+                        selectedBoxes > 0
+                            ? store.moveSelectedBoxes(dx, dy)
+                            : box.setPosition(box.left + dx, box.top + dy);
                     },
                 },
             });
