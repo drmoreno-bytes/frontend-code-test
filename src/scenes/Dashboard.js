@@ -1,17 +1,17 @@
 import React from 'react';
 
 import store from '../stores/MainStore';
-import Canvas from './Canvas';
-import Toolbar from './Toolbar';
+import Canvas from '../components/Canvas';
+import Toolbar from '../components/Toolbar';
 import { observer } from 'mobx-react';
 
-function App() {
+function Dashboard() {
     return (
-        <div className="app">
+        <div className="dashboard">
             <Toolbar store={store} />
             <Canvas store={store} />
         </div>
     );
 }
 
-export default observer(App);
+export default observer(Dashboard);

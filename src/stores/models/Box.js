@@ -10,7 +10,6 @@ const BoxModel = types
         top: 100,
         isSelected: false,
     })
-    .views((self) => ({}))
     .actions((self) => ({
         toggleSelection() {
             self.isSelected = !self.isSelected;
