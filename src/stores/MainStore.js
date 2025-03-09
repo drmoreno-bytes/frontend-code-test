@@ -49,13 +49,17 @@ const MainStore = types
 
 const store = MainStore.create();
 
-onSnapshot(store, (snapshot) => {
-    localStorage.setItem('geniallyStore', JSON.stringify(snapshot));
-});
+try {
+    onSnapshot(store, (snapshot) => {
+        localStorage.setItem('geniallyStore', JSON.stringify(snapshot));
+    });
 
-const savedState = localStorage.getItem('geniallyStore');
-if (savedState) {
-    applySnapshot(store, JSON.parse(savedState));
+    const savedState = localStorage.getItem('geniallyStore');
+    if (savedState) {
+        applySnapshot(store, JSON.parse(savedState));
+    }
+} catch (error) {
+    console.error('Error accessing localStorage:', error);
 }
 
 export default store;
