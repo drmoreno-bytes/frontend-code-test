@@ -7,6 +7,7 @@ const useDraggable = (boxRef, box) => {
         if (!boxRef.current) {
             return;
         }
+
         interact(boxRef.current).draggable({
             modifiers: [
                 interact.modifiers.restrictRect({
@@ -15,11 +16,13 @@ const useDraggable = (boxRef, box) => {
             ],
             listeners: {
                 move(event) {
-                    const { dx, dy } = event;
-                    const selectedBoxes = store.selectedBoxCount;
-                    selectedBoxes > 0
-                        ? store.moveSelectedBoxes(dx, dy)
-                        : box.setPosition(box.left + dx, box.top + dy);
+                    window.requestAnimationFrame(() => {
+                        const { dx, dy } = event;
+                        const selectedBoxes = store.selectedBoxCount;
+                        selectedBoxes > 0
+                            ? store.moveSelectedBoxes(dx, dy)
+                            : box.setPosition(box.left + dx, box.top + dy);
+                    });
                 },
             },
         });
