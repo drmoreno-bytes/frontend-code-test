@@ -4,6 +4,7 @@ import uuid from 'uuid/v4';
 import getRandomColor from '../utils/getRandomColor';
 
 function Toolbar({ store }) {
+    const selectedBoxes = store.selectedBoxCount;
     const handleAddBox = () => {
         const canvas = document.querySelector('.canva');
         if (!canvas) return;
@@ -31,12 +32,27 @@ function Toolbar({ store }) {
         store.removeSelectedBoxes();
     };
 
+    const handleChangeColor = (e) => {
+        const color = e.target.value;
+        store.setColorForSelectedBoxes(color);
+    };
+
     return (
         <div className="toolbar">
             <button onClick={handleAddBox}>Add Box</button>
             <button onClick={handleRemoveSelectedBoxes}>Remove Box</button>
-            <input type="color" />
-            <span>Selected Box Count: {store.selectedBoxCount}</span>
+            <input
+                type="color"
+                onChange={handleChangeColor}
+                disabled={selectedBoxes <= 0}
+            />
+            <span>
+                {selectedBoxes > 0
+                    ? `Selected ${
+                          selectedBoxes > 1 ? 'Boxes' : 'Box'
+                      }: ${selectedBoxes}`
+                    : 'No boxes selected'}
+            </span>
         </div>
     );
 }

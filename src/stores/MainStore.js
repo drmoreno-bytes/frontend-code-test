@@ -15,6 +15,11 @@ const MainStore = types
             removeSelectedBoxes() {
                 self.boxes = self.boxes.filter((box) => !box.isSelected);
             },
+            setColorForSelectedBoxes(color) {
+                self.boxes.forEach((box) => {
+                    if (box.isSelected) box.setColor(color);
+                });
+            },
         };
     })
     .views((self) => ({
