@@ -17,6 +17,7 @@ function Canvas({ store }) {
                     height={box.height}
                     isSelected={box.isSelected}
                     toggleSelection={box.toggleSelection}
+                    setPosition={box.setPosition}
                     box={box}
                 />
             ))}
