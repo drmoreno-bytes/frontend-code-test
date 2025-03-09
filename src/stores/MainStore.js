@@ -1,7 +1,5 @@
-import { types } from 'mobx-state-tree';
-import uuid from 'uuid/v4';
+import { types, applySnapshot, onSnapshot } from 'mobx-state-tree';
 import BoxModel from './models/Box';
-import getRandomColor from '../utils/getRandomColor';
 import { UndoManager } from 'mst-middlewares';
 
 const MainStore = types
@@ -10,7 +8,7 @@ const MainStore = types
         history: types.optional(UndoManager, {}),
     })
     .actions((self) => {
-        let undoManager;
+        let undoManager = self.history;
         return {
             addBox(box) {
                 self.boxes.push(box);
@@ -28,9 +26,12 @@ const MainStore = types
                 if (!boxesToMove || boxesToMove.length <= 0) {
                     return;
                 }
-                boxesToMove.forEach((b) => {
-                    b.setPosition(b.left + dx, b.top + dy);
+                undoManager.startGroup(() => {
+                    boxesToMove.forEach((b) => {
+                        b.setPosition(b.left + dx, b.top + dy);
+                    });
                 });
+                undoManager.stopGroup();
             },
             undo() {
                 undoManager.canUndo && undoManager.undo();
@@ -48,14 +49,13 @@ const MainStore = types
 
 const store = MainStore.create();
 
-const box1 = BoxModel.create({
-    id: uuid(),
-    color: getRandomColor(),
-    left: 0,
-    top: 0,
-    isSelected: false,
+onSnapshot(store, (snapshot) => {
+    localStorage.setItem('geniallyStore', JSON.stringify(snapshot));
 });
 
-store.addBox(box1);
+const savedState = localStorage.getItem('geniallyStore');
+if (savedState) {
+    applySnapshot(store, JSON.parse(savedState));
+}
 
 export default store;

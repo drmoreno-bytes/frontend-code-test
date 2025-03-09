@@ -8,7 +8,7 @@ const BoxModel = types
         color: '#FFF000',
         left: 200,
         top: 100,
-        isSelected: true,
+        isSelected: false,
     })
     .views((self) => ({}))
     .actions((self) => ({
