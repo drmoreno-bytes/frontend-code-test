@@ -2,12 +2,15 @@ import { types } from 'mobx-state-tree';
 import uuid from 'uuid/v4';
 import BoxModel from './models/Box';
 import getRandomColor from '../utils/getRandomColor';
+import { UndoManager } from 'mst-middlewares';
 
 const MainStore = types
     .model('MainStore', {
         boxes: types.array(BoxModel),
+        history: types.optional(UndoManager, {}),
     })
     .actions((self) => {
+        let undoManager;
         return {
             addBox(box) {
                 self.boxes.push(box);
@@ -28,6 +31,12 @@ const MainStore = types
                 boxesToMove.forEach((b) => {
                     b.setPosition(b.left + dx, b.top + dy);
                 });
+            },
+            undo() {
+                undoManager.undo();
+            },
+            redo() {
+                undoManager.redo();
             },
         };
     })

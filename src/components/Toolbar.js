@@ -41,6 +41,18 @@ function Toolbar({ store }) {
         <div className="toolbar">
             <button onClick={handleAddBox}>Add Box</button>
             <button onClick={handleRemoveSelectedBoxes}>Remove Box</button>
+            <button
+                onClick={() => store.history.undo()}
+                disabled={!store.history.canUndo}
+            >
+                Undo
+            </button>
+            <button
+                onClick={() => store.history.redo()}
+                disabled={!store.history.canRedo}
+            >
+                Redo
+            </button>
             <input
                 type="color"
                 onChange={handleChangeColor}
