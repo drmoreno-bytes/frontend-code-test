@@ -62,6 +62,7 @@ const saveState = () => {
         }
     } catch (error) {
         console.error('Error accessing localStorage:', error);
+        localStorage.removeItem('canvasStore');
     }
 };
 

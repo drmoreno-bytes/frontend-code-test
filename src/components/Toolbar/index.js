@@ -4,20 +4,17 @@ import uuid from 'uuid/v4';
 import getRandomColor from '../../utils/getRandomColor';
 import { SelectedBoxCount } from '../SelectedBoxCount';
 
-export const Toolbar = observer(({ store }) => {
+export const Toolbar = observer(({ store, canvasSize }) => {
     const selectedBoxes = store.selectedBoxCount;
+
     const handleAddBox = () => {
-        const canvas = document.querySelector('.canva');
-        if (!canvas) return;
+        const { width, height } = canvasSize;
+        if (width === 0 || height === 0) return;
         const boxWidth = 200;
         const boxHeight = 100;
 
-        const randomX = Math.floor(
-            Math.random() * (canvas.clientWidth - boxWidth)
-        );
-        const randomY = Math.floor(
-            Math.random() * (canvas.clientHeight - boxHeight)
-        );
+        const randomX = Math.floor(Math.random() * (width - boxWidth));
+        const randomY = Math.floor(Math.random() * (height - boxHeight));
         store.addBox({
             id: uuid(),
             width: 200,
