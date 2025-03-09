@@ -1,8 +1,8 @@
 import React, { useRef } from 'react';
 import { observer } from 'mobx-react';
-import useDraggable from '../hooks/useDraggable';
+import useDraggable from '../../hooks/useDraggable';
 
-function BoxDraggable(box) {
+export const BoxDraggable = observer((box) => {
     const boxRef = useRef(null);
     useDraggable(boxRef, box);
 
@@ -25,6 +25,4 @@ function BoxDraggable(box) {
             {box.children}
         </div>
     );
-}
-
-export default observer(BoxDraggable);
+});

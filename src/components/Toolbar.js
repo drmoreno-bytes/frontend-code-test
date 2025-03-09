@@ -2,6 +2,7 @@ import React from 'react';
 import { observer } from 'mobx-react';
 import uuid from 'uuid/v4';
 import getRandomColor from '../utils/getRandomColor';
+import { SelectedBoxCount } from '../components/SelectedBoxCount';
 
 function Toolbar({ store }) {
     const selectedBoxes = store.selectedBoxCount;
@@ -58,13 +59,7 @@ function Toolbar({ store }) {
                 onChange={handleChangeColor}
                 disabled={selectedBoxes <= 0}
             />
-            <span>
-                {selectedBoxes > 0
-                    ? `Selected ${
-                          selectedBoxes > 1 ? 'Boxes' : 'Box'
-                      }: ${selectedBoxes}`
-                    : 'No boxes selected'}
-            </span>
+            <SelectedBoxCount selectedBoxes={selectedBoxes} />
         </div>
     );
 }
