@@ -1,8 +1,8 @@
 import React from 'react';
 
 import store from '../stores/MainStore';
-import Canvas from '../components/Canvas';
-import Toolbar from '../components/Toolbar';
+import { Canvas } from '../components/Canvas/index';
+import { Toolbar } from '../components/Toolbar/index';
 import { observer } from 'mobx-react';
 
 function Dashboard() {

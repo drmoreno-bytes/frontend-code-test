@@ -1,10 +1,10 @@
 import React from 'react';
 import { observer } from 'mobx-react';
 import uuid from 'uuid/v4';
-import getRandomColor from '../utils/getRandomColor';
-import { SelectedBoxCount } from '../components/SelectedBoxCount';
+import getRandomColor from '../../utils/getRandomColor';
+import { SelectedBoxCount } from '../SelectedBoxCount';
 
-function Toolbar({ store }) {
+export const Toolbar = observer(({ store }) => {
     const selectedBoxes = store.selectedBoxCount;
     const handleAddBox = () => {
         const canvas = document.querySelector('.canva');
@@ -62,6 +62,4 @@ function Toolbar({ store }) {
             <SelectedBoxCount selectedBoxes={selectedBoxes} />
         </div>
     );
-}
-
-export default observer(Toolbar);
+});

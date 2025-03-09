@@ -1,9 +1,9 @@
 import React from 'react';
 
 import { observer } from 'mobx-react';
-import { Box } from '../components/Box/index';
+import { Box } from '../Box';
 
-function Canvas({ store }) {
+export const Canvas = observer(({ store }) => {
     return (
         <div className="canva">
             {store.boxes.map((box, index) => (
@@ -23,6 +23,4 @@ function Canvas({ store }) {
             ))}
         </div>
     );
-}
-
-export default observer(Canvas);
+});
