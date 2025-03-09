@@ -51,10 +51,10 @@ const store = MainStore.create();
 
 try {
     onSnapshot(store, (snapshot) => {
-        localStorage.setItem('geniallyStore', JSON.stringify(snapshot));
+        localStorage.setItem('canvasStore', JSON.stringify(snapshot));
     });
 
-    const savedState = localStorage.getItem('geniallyStore');
+    const savedState = localStorage.getItem('canvasStore');
     if (savedState) {
         applySnapshot(store, JSON.parse(savedState));
     }

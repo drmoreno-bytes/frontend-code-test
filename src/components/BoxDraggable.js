@@ -1,32 +1,10 @@
 import React, { useRef } from 'react';
 import { observer } from 'mobx-react';
-import { useEffect } from 'react';
-import interact from 'interactjs';
-import store from '../stores/MainStore';
+import useDraggable from '../hooks/useDraggable';
 
 function BoxDraggable(box) {
     const boxRef = useRef(null);
-
-    useEffect(() => {
-        if (boxRef.current) {
-            interact(boxRef.current).draggable({
-                modifiers: [
-                    interact.modifiers.restrictRect({
-                        restriction: 'parent',
-                    }),
-                ],
-                listeners: {
-                    move(event) {
-                        const { dx, dy } = event;
-                        const selectedBoxes = store.selectedBoxCount;
-                        selectedBoxes > 0
-                            ? store.moveSelectedBoxes(dx, dy)
-                            : box.setPosition(box.left + dx, box.top + dy);
-                    },
-                },
-            });
-        }
-    }, [boxRef, box]);
+    useDraggable(boxRef, box);
 
     return (
         <div
