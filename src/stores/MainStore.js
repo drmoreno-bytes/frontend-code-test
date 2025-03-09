@@ -8,7 +8,8 @@ const MainStore = types
         history: types.optional(UndoManager, {}),
     })
     .actions((self) => {
-        let undoManager = self.history;
+        const { history } = self;
+
         return {
             addBox(box) {
                 self.boxes.push(box);
@@ -23,21 +24,21 @@ const MainStore = types
             },
             moveSelectedBoxes(dx, dy) {
                 const boxesToMove = self.boxes.filter((box) => box.isSelected);
-                if (!boxesToMove || boxesToMove.length <= 0) {
+                if (boxesToMove.length === 0) {
                     return;
                 }
-                undoManager.startGroup(() => {
+                history.startGroup(() => {
                     boxesToMove.forEach((b) => {
                         b.setPosition(b.left + dx, b.top + dy);
                     });
                 });
-                undoManager.stopGroup();
+                history.stopGroup();
             },
             undo() {
-                undoManager.canUndo && undoManager.undo();
+                history.canUndo && history.undo();
             },
             redo() {
-                undoManager.canRedo && undoManager.redo();
+                history.canRedo && history.redo();
             },
         };
     })
@@ -49,17 +50,21 @@ const MainStore = types
 
 const store = MainStore.create();
 
-try {
-    onSnapshot(store, (snapshot) => {
-        localStorage.setItem('canvasStore', JSON.stringify(snapshot));
-    });
+const saveState = () => {
+    try {
+        onSnapshot(store, (snapshot) => {
+            localStorage.setItem('canvasStore', JSON.stringify(snapshot));
+        });
 
-    const savedState = localStorage.getItem('canvasStore');
-    if (savedState) {
-        applySnapshot(store, JSON.parse(savedState));
+        const savedState = localStorage.getItem('canvasStore');
+        if (savedState) {
+            applySnapshot(store, JSON.parse(savedState));
+        }
+    } catch (error) {
+        console.error('Error accessing localStorage:', error);
     }
-} catch (error) {
-    console.error('Error accessing localStorage:', error);
-}
+};
+
+saveState();
 
 export default store;
