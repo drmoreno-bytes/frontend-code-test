@@ -11,15 +11,12 @@ export const BoxDraggable = observer((box) => {
         <div
             ref={boxRef}
             id={box.id}
-            className="box"
+            className={`box ${box.isSelected ? 'box-selected' : ''}`}
             style={{
-                position: 'absolute',
                 backgroundColor: box.color,
                 width: `${box.width}px`,
                 height: `${box.height}px`,
                 transform: `translate(${box.left}px, ${box.top}px)`,
-                cursor: 'pointer',
-                border: box.isSelected ? '3px solid #f51fad' : '',
             }}
             onDoubleClick={() => box.toggleSelection()}
         >

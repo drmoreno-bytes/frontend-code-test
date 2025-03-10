@@ -11,3 +11,14 @@
     align-items: center;
     border-radius: 8px;
 }
+
+.text-selected {
+    font-weight: bold;
+}
+
+.box-selected {
+    box-shadow: 0 0 2px rgba(118, 76, 231, 0.4);
+    border: 3px solid #f51fad;
+    position: 'absolute';
+    cursor: 'pointer';
+}
