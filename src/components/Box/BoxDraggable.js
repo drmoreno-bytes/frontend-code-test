@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { observer } from 'mobx-react';
 import useDraggable from '../../hooks/useDraggable';
+import './box.css';
 
 export const BoxDraggable = observer((box) => {
     const boxRef = useRef(null);
