@@ -40,14 +40,19 @@ export const Toolbar = observer(({ store, canvasSize }) => {
     return (
         <div className="toolbar actions">
             <SelectedBoxCount selectedBoxes={selectedBoxes} />
-            <div class="horizontal-line" />
+            <div className="horizontal-line" />
 
-            <button className="action-button" onClick={handleAddBox}>
+            <button
+                className="action-button"
+                onClick={handleAddBox}
+                aria-label="Add Box"
+            >
                 <Plus absoluteStrokeWidth={false} size="30" />
             </button>
             <button
                 className="action-button"
                 onClick={handleRemoveSelectedBoxes}
+                aria-label="Remove Box"
             >
                 <Trash2 absoluteStrokeWidth={false} size="30" />
             </button>
@@ -55,6 +60,7 @@ export const Toolbar = observer(({ store, canvasSize }) => {
                 className="action-button"
                 onClick={() => store.history.undo()}
                 disabled={!store.history.canUndo}
+                aria-label="Undo"
             >
                 <Undo absoluteStrokeWidth={false} size="30" />
             </button>
@@ -62,15 +68,16 @@ export const Toolbar = observer(({ store, canvasSize }) => {
                 className="action-button"
                 onClick={() => store.history.redo()}
                 disabled={!store.history.canRedo}
+                aria-label="Redo"
             >
                 <Redo absoluteStrokeWidth={false} size="30" />
             </button>
             <input
                 type="color"
-                id="colorInput"
                 onChange={handleChangeColor}
                 disabled={selectedBoxes <= 0}
                 className="palette"
+                aria-label="Select color"
             />
         </div>
     );
