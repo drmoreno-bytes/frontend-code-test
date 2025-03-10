@@ -18,7 +18,7 @@ export const BoxDraggable = observer((box) => {
                 height: `${box.height}px`,
                 transform: `translate(${box.left}px, ${box.top}px)`,
                 cursor: 'pointer',
-                border: box.isSelected ? '3px solid blue' : '',
+                border: box.isSelected ? '3px solid #f51fad' : '',
             }}
             onDoubleClick={() => box.toggleSelection()}
         >

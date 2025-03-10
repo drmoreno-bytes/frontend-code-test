@@ -1,0 +1,79 @@
+.toolbar {
+    position: relative;
+    top: 0;
+    left: 0;
+    padding: 0 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    background: white;
+    border-radius: 8px 0 0 8px;
+    min-height: 675px;
+    max-height: 675px;
+    min-width: 140px;
+    background: linear-gradient(
+        135deg,
+        rgba(118, 76, 231, 0.795),
+        rgba(50, 30, 170, 0.795)
+    );
+}
+
+.toolbar span {
+    position: absolute;
+    color: white;
+    top: 50px;
+}
+
+.actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    flex-direction: column;
+    list-style: none;
+}
+
+.action-button {
+    display: flex;
+    height: 2.25rem;
+    min-width: 2rem;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    padding: 0.5rem;
+    font-size: 13px;
+    font-weight: 500;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    color: white;
+    cursor: pointer;
+}
+
+.action-button:hover {
+    color: #f51fad;
+}
+
+.palette {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.palette:hover {
+    background: #f51fad;
+}
+
+.palette:disabled {
+    background: transparent;
+    cursor: not-allowed;
+}
+
+.horizontal-line {
+    border-bottom: 2px solid #ffffff;
+    margin: 20px 0;
+    width: 80%;
+    position: absolute;
+    top: 70px;
+}

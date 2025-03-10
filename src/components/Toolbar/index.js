@@ -3,6 +3,8 @@ import { observer } from 'mobx-react';
 import uuid from 'uuid/v4';
 import getRandomColor from '../../utils/getRandomColor';
 import { SelectedBoxCount } from '../SelectedBoxCount';
+import { Plus, Trash2, Undo, Redo, Palette } from 'lucide-react';
+import './toolbar.css';
 
 export const Toolbar = observer(({ store, canvasSize }) => {
     const selectedBoxes = store.selectedBoxCount;
@@ -36,27 +38,40 @@ export const Toolbar = observer(({ store, canvasSize }) => {
     };
 
     return (
-        <div className="toolbar">
-            <button onClick={handleAddBox}>Add Box</button>
-            <button onClick={handleRemoveSelectedBoxes}>Remove Box</button>
+        <div className="toolbar actions">
+            <SelectedBoxCount selectedBoxes={selectedBoxes} />
+            <div class="horizontal-line" />
+
+            <button className="action-button" onClick={handleAddBox}>
+                <Plus absoluteStrokeWidth={false} size="30" />
+            </button>
             <button
+                className="action-button"
+                onClick={handleRemoveSelectedBoxes}
+            >
+                <Trash2 absoluteStrokeWidth={false} size="30" />
+            </button>
+            <button
+                className="action-button"
                 onClick={() => store.history.undo()}
                 disabled={!store.history.canUndo}
             >
-                Undo
+                <Undo absoluteStrokeWidth={false} size="30" />
             </button>
             <button
+                className="action-button"
                 onClick={() => store.history.redo()}
                 disabled={!store.history.canRedo}
             >
-                Redo
+                <Redo absoluteStrokeWidth={false} size="30" />
             </button>
             <input
                 type="color"
+                id="colorInput"
                 onChange={handleChangeColor}
                 disabled={selectedBoxes <= 0}
+                className="palette"
             />
-            <SelectedBoxCount selectedBoxes={selectedBoxes} />
         </div>
     );
 });
