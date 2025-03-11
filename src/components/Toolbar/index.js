@@ -3,7 +3,7 @@ import { observer } from 'mobx-react';
 import uuid from 'uuid/v4';
 import getRandomColor from '../../utils/getRandomColor';
 import { SelectedBoxCount } from '../SelectedBoxCount';
-import { Plus, Trash2, Undo, Redo, Palette } from 'lucide-react';
+import { Plus, Trash2, Undo, Redo } from 'lucide-react';
 import './toolbar.css';
 
 export const Toolbar = observer(({ store, canvasSize }) => {
