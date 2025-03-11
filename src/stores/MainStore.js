@@ -9,7 +9,6 @@ const MainStore = types
     })
     .actions((self) => {
         const { history } = self;
-
         return {
             addBox(box) {
                 self.boxes.push(box);
@@ -48,24 +47,23 @@ const MainStore = types
         },
     }));
 
-const store = MainStore.create();
-
-const saveState = () => {
+const store = MainStore.create({ boxes: [] });
+const initializeStore = () => {
     try {
-        onSnapshot(store, (snapshot) => {
-            localStorage.setItem('canvasStore', JSON.stringify(snapshot));
-        });
-
         const savedState = localStorage.getItem('canvasStore');
         if (savedState) {
             applySnapshot(store, JSON.parse(savedState));
         }
+
+        onSnapshot(store, (snapshot) => {
+            localStorage.setItem('canvasStore', JSON.stringify(snapshot));
+        });
     } catch (error) {
         console.error('Error accessing localStorage:', error);
         localStorage.removeItem('canvasStore');
     }
 };
 
-saveState();
+initializeStore();
 
 export default store;
